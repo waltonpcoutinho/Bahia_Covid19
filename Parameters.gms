@@ -970,7 +970,12 @@ Parameter gammaFactor(i);
 gammaFactor(i) = 1;
 
 
+********************************************************************************************
+*'Export data using GDX utilities'
+********************************************************************************************
 
+*'First unload to GDX file (occurs during execution phase)'
+execute_unload "parameters.gdx"
 
 
 

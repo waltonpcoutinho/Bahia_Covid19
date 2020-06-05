@@ -109,8 +109,12 @@ Model locationModel / all /;
 solve locationModel using mip maximizing F1;
 
 
+********************************************************************************************
+*'Export solution using GDX utilities'
+********************************************************************************************
 
-
+*'First unload to GDX file (occurs during execution phase)'
+execute_unload "solution.gdx" , x, q, y, y_city, delta;
 
 
 

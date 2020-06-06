@@ -41,10 +41,10 @@ Equations
 *   deltaVal      'Value of the inequity var'
 ;
 
-obj1 .. 
+obj1 ..
                   F1 =e= sum( (j), betaFactor(j)*y(j) ) + sum( (i,k,s), probability(s)*betaCity(i)*y_city(i,k,s) );
 
-obj2 .. 
+obj2 ..
                   F2 =e= sum( (j), delta(j));
 
 *Constraint (2)
@@ -54,17 +54,17 @@ linear0(j) ..
 
 *Constraint (10)
 
-linear1(k) .. 
+linear1(k) ..
                   z(k) =l= q(k);
 
 *Constraint (11)
 
-linear2(k) .. 
+linear2(k) ..
                   z(k) =l= maximumC(k)*x(k);
 
 *Constraint (12)
 
-linear3(k) .. 
+linear3(k) ..
                   z(k) =g= q(k) - minimumC(k)*(1 - x(k));
 
 *Constraint (3)
@@ -74,12 +74,12 @@ infection(j) ..
 
 *Constraint (4)
 
-maxCapacity(k) .. 
+maxCapacity(k) ..
                   q(k) =l= maximumC(k)*x(k);
 
 *Constraint (5)
 
-minCapacity(k) .. 
+minCapacity(k) ..
                   q(k) =g= minimumC(k)*x(k);
 
 *Constraint (6)
@@ -115,6 +115,13 @@ solve locationModel using mip maximizing F1;
 
 *'First unload to GDX file (occurs during execution phase)'
 execute_unload "solution.gdx" , x, q, y, y_city, delta;
+
+*'Export data to excel files'
+execute 'gdxxrw.exe solution.gdx var=x.l rng=Facilities!'
+execute 'gdxxrw.exe solution.gdx var=q.l rng=Capacity!'
+execute 'gdxxrw.exe solution.gdx var=y.l rng=Served_macro!'
+execute 'gdxxrw.exe solution.gdx var=y_city.l rng=Served_city!'
+execute 'gdxxrw.exe solution.gdx var=delta.l rng=Inequity!'
 
 
 

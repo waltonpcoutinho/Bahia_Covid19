@@ -47,7 +47,7 @@ r-vitoria-da-conquista
 r-jequie
 /
 
-macroCluster(j,k)
+microCluster(j,k)
 /
 centro-norte.(r-feira-de-santana,r-irece,r-itaberaba,r-jacobina,r-senhor-do-bonfim)
 centro-sul.(r-boquira,r-brumado,r-guanambi,r-itapetinga,r-jequie,r-livramento-de-nossa-senhora,r-seabra,r-vitoria-da-conquista)
@@ -479,7 +479,7 @@ ubaira
 jiquirica
 /
 
-microCluster(k,i)
+cityCluster(k,i)
 /
 r-feira-de-santana.(agua-fria,anguera,antonio-cardoso,conceicao-da-feira,conceicao-do-jacuipe,coracao-de-maria,elisio-medrado,feira-de-santana,ipecaeta,ipira,irara,itatim,ouricangas,pedrao,pintadas,rafael-jambeiro,santa-barbara,santa-teresinha,santanopolis,santo-estevao,sao-goncalo-dos-campos,serra-preta,tanquinho,teodoro-sampaio)
 r-irece.(america-dourada,barra-do-mendes,barro-alto,cafarnaum,canarana,central,gentio-do-ouro,ibipeba,ibitita,iraquara,irece,joao-dourado,jussara,lapao,mulungu-do-morro,presidente-dutra,sao-gabriel,souto-soares,uibai)

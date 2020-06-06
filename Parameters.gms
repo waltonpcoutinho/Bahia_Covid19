@@ -899,7 +899,7 @@ macro_pop(j) = sum( (k,i), populationTable(j,k,i) );
 *'Area of macro-region j'
 Parameter area_macro(j);
 
-area_macro(j) = sum( macroCluster(j,k), area_micro(k) );
+area_macro(j) = sum( microCluster(j,k), area_micro(k) );
 
 *'Priotirisation factor of macro-region j'
 Parameter betaFactor(j);
@@ -939,7 +939,7 @@ minimumC(k) = 0.5*sum((j,i), populationTable(j,k,i));
 *'Maximum capacity of POD'
 Parameter maximumC(k);
 
-maximumC(k) = sum((j,k2,i)$(macroCluster(j,k) and macroCluster(j,k2)), populationTable(j,k2,i));
+maximumC(k) = sum((j,k2,i)$(microCluster(j,k) and microCluster(j,k2)), populationTable(j,k2,i));
 
 *'Total Population of micro-region k'
 Parameter micro_pop(k); 

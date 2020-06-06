@@ -50,7 +50,7 @@ obj2 ..
 *Constraint (2)
 
 linear0(j) ..
-                  y(j) =l= sum( macroCluster(j,k), z(k) );
+                  y(j) =l= sum( microCluster(j,k), z(k) );
 
 *Constraint (10)
 
@@ -70,7 +70,7 @@ linear3(k) ..
 *Constraint (3)
 
 infection(j) ..
-                  y(j) =l= sum( (macroCluster(j,k)), alpha(k)*micro_pop(k) );
+                  y(j) =l= sum( (microCluster(j,k)), alpha(k)*micro_pop(k) );
 
 *Constraint (4)
 
@@ -90,16 +90,22 @@ budgetCons ..
 *Constraint (7)
 
 facility(j) ..
-                  sum( macroCluster(j,k), x(k) ) =g= 1;
+                  sum( microCluster(j,k), x(k) ) =g= 1;
 
-allocCap(j, macroCluster(j,k), s) ..
-                  sum( i, y_city(i,k,s) ) =l= q(k);
+*Constraint (8)
 
-allocInfect(i,j,s) ..
-                  sum( macroCluster(j,k), y_city(i,k,s) ) =l= alpha_city(i,s)*population(i);
+allocCap(j, microCluster(j,k), s) ..
+                  sum( cityCluster(k2,i)$(microCluster(j,k2)), y_city(i,k,s) ) =l= q(k);
 
-*deltaVal(i,l,j,s) ..
-*                  delta(j) =g= sum( macroCluster(j,k), (y_city(i,k,s)/(alpha_city(i,s)*population(i)))
+*Constraint (9)
+
+allocInfect(j, cityCluster(k,i)$(microCluster(j,k), s) ..
+                  sum( microCluster(j,k2), y_city(i,k2,s) ) =l= alpha_city(i,s)*population(i);
+
+*Constraint (10)
+
+*deltaVal(i, l, j, s) ..
+*                  delta(j) =g= sum( microCluster(j,k), (y_city(i,k,s)/(alpha_city(i,s)*population(i)))
 *                                                      -(y_city(l,k,s)/(alpha_city(l,s)*population(l))) );
 
 

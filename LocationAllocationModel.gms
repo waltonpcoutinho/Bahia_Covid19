@@ -99,7 +99,7 @@ allocCap(j, microCluster(j,k), s) ..
 
 *Constraint (9)
 
-allocInfect(j, cityCluster(k,i)$(microCluster(j,k), s) ..
+allocInfect(j, cityCluster(k,i), s)$(microCluster(j,k)) ..
                   sum( microCluster(j,k2), y_city(i,k2,s) ) =l= alpha_city(i,s)*population(i);
 
 *Constraint (10)

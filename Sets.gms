@@ -523,6 +523,13 @@ socialIdx social indices
 
 ;
 
+Set macroCluster(j,i);
+
+macroCluster(j,i) = no;
+loop(k,
+   macroCluster(j,i) $ (cityCluster(k,i) AND microCluster(j,k)) = yes;
+);
+
 *'Alias for the set of cities i'
 Alias(i,l);
 Alias(k,k2);

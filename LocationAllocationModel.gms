@@ -41,6 +41,11 @@ Equations
 *   deltaVal      'Value of the inequity var'
 ;
 
+*'Set lower and upper bounds'
+y.up(j) = macro_pop(j);
+y_city.up(i,k,s)$(not(cityCluster(k,i))) = 0;
+
+*'Create model'
 obj1 ..
                   F1 =e= sum( (j), betaFactor(j)*y(j) ) + sum( (i,k,s), probability(s)*betaCity(i)*y_city(i,k,s) );
 
@@ -50,7 +55,7 @@ obj2 ..
 *Constraint (2)
 
 linear0(j) ..
-                  y(j) =l= sum( microCluster(j,k), z(k) );
+                  y(j) =l= sum( k$(microCluster(j,k)), z(k) );
 
 *Constraint (10)
 
@@ -70,7 +75,7 @@ linear3(k) ..
 *Constraint (3)
 
 infection(j) ..
-                  y(j) =l= sum( (microCluster(j,k)), alpha(k)*micro_pop(k) );
+                  y(j) =l= sum( k$(microCluster(j,k)), micro_pop(k) );
 
 *Constraint (4)
 
@@ -90,19 +95,19 @@ budgetCons ..
 *Constraint (7)
 
 facility(j) ..
-                  sum( microCluster(j,k), x(k) ) =g= 1;
-
-*Constraint (8)
-
-allocCap(j, microCluster(j,k), s) ..
-                  sum( cityCluster(k2,i)$(microCluster(j,k2)), y_city(i,k,s) ) =l= q(k);
+                  sum( k$(microCluster(j,k)), x(k) ) =g= 1;
 
 *Constraint (9)
 
-allocInfect(j, cityCluster(k,i), s)$(microCluster(j,k)) ..
-                  sum( microCluster(j,k2), y_city(i,k2,s) ) =l= alpha_city(i,s)*population(i);
+allocCap(k, j, s)$(microCluster(j,k)) ..
+                  sum( cityCluster(k2,i)$(microCluster(j,k2)), y_city(i,k,s) ) =l= q(k);
 
 *Constraint (10)
+
+allocInfect(i, j, s)$(macroCluster(j,i)) ..
+                  sum( k$(microCluster(j,k)), y_city(i,k,s) ) =l= alpha_city(i,s)*population(i);
+
+*Constraint (11)
 
 *deltaVal(i, l, j, s) ..
 *                  delta(j) =g= sum( microCluster(j,k), (y_city(i,k,s)/(alpha_city(i,s)*population(i)))
@@ -112,6 +117,7 @@ allocInfect(j, cityCluster(k,i), s)$(microCluster(j,k)) ..
 
 Model locationModel / all /;
 
+option limrow = 1000;
 solve locationModel using mip maximizing F1;
 
 

@@ -929,7 +929,7 @@ betaCity(i) = (sum( socialIdx, omega(socialIdx)*(1 + socioEconomicData(i, social
 *'Total Budget (people)'
 scalar budget;
 
-budget = 0.15*sum( (j,k,i), populationTable(j,k,i) );
+budget = 0.20*sum( (j,k,i), populationTable(j,k,i) );
 
 *'Minimum capacity of POD'
 Parameter minimumC(k);

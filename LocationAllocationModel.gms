@@ -43,7 +43,14 @@ Equations
 
 *'Set lower and upper bounds'
 y.up(j) = macro_pop(j);
-y_city.up(i,k,s)$(not(cityCluster(k,i))) = 0;
+
+loop(i,
+   loop(j,
+      if( Not macroCluster(j,i),
+         y_city.up(i,k,s)$(microCluster(j,k)) = 0;
+      );
+   );
+);
 
 *'Create model'
 obj1 ..
